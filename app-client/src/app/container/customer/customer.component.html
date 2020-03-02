@@ -1,0 +1,104 @@
+<div nz-row class="mgbt20">
+  <div nz-col nzSpan="12">
+    <h3>Khách đào tạo</h3>
+  </div>
+  <div nz-col nzSpan="12">
+    <div class="float-right">
+      <button (click)="handleCorU({})" nz-button nzType="primary"><i nz-icon nzType="plus" nzTheme="outline"></i>
+        Tạo mới </button>
+    </div>
+  </div>
+</div>
+<div class="box box-success">
+  <div class="box-header">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="filterForm" (ngSubmit)="handleFilter()">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="key">
+            <input nz-input type="text" formControlName="find" placeholder="Từ khóa" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button type="submit" nzType="primary">Hiển thị</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+
+  <div class="box-body">
+    <div class="table-responsive">
+      <nz-table nzBordered #ajaxTable nzShowSizeChanger [nzFrontPagination]="false" [nzData]="listOfData"
+        [nzLoading]="loading" [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize"
+        nzFooter="Hiển thị {{ (pageSize > listOfData.length) ? listOfData.length : pageSize  }} trên tổng số {{ total}}"
+        (nzPageIndexChange)="getAll()" (nzPageSizeChange)="getAll()">
+        <thead>
+          <tr>
+            <th width="3%" class="text-center">STT</th>
+            <th width="7%"  style="min-width: 100px;"class="text-center">Ngày tạo</th>
+            <th width="13%" style="min-width: 100px;">
+              Họ tên
+            <th width="9%" style="min-width: 100px;" class="text-center">
+              Điện thoại
+            </th>
+            <th width="7%" style="min-width: 100px;" class="text-center">
+              Mã GD
+            </th>
+            <th width="12%" style="min-width: 100px;" class="text-center">
+              Email GD
+            </th>
+            
+            <th width="10%" style="min-width: 100px;" class="text-center">
+              Telegram
+            </th>
+            <th width="8%" style="min-width: 50px;" class="text-center">
+              Phí học viên
+            </th>
+            <th width="13%" style="min-width: 100px;">
+              <span>Ghi chú</span>
+            </th>
+            <th width="7%" style="min-width: 100px;" class="text-center">
+              Trạng thái
+            </th>
+            <th width="7%" class="text-center"><span>Hành động</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of ajaxTable.data;let i = index">
+            <td class="text-center">{{ i+ 1}}</td>
+            <td class="text-center">{{ formatDate(data.created,'DD/MM/YYYY HH:ii')}}</td>
+            <td>{{ data.fullname }}</td>
+            <td class="text-center">{{ data.transaction_code }}</td>
+            <td class="text-center">{{ data.phone }}</td>
+            <td class="text-center">{{ data.email }}</td>
+            <td class="text-center">{{ data.username_telegram  }}</td>
+            <td class="text-right">{{ data.price_transaction | number }} $</td>
+            <td>{{ data.note }}</td>
+            <td>
+              <span *ngIf="data.active == 0" class="badge badge-danger">Ngừng kích hoạt</span>
+              <span *ngIf="data.active == 1" class="badge badge-success">Kích hoạt</span>
+            </td>
+            <td class="cttd" class="text-center">
+              <div zn-row>
+                <i nz-icon nzType="edit" nz-tooltip nzTitle="Sửa khách hàng" class="iconAction text-warning"
+                  (click)="handleCorU(data)" nzTheme="outline"></i>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
+
+<nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+  (nzOnCancel)="previewVisible = false">
+  <ng-template #modalContent>
+    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+  </ng-template>
+</nz-modal>
+
+<app-cou-customer *ngIf="isVisible" [dataEdit]="dataEdit" [isVisible]="isVisible" (closeModal)="closeModal($event)"
+  class="fade in">
+</app-cou-customer>

@@ -1,0 +1,75 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Khách hàng" nzOkText="Xác nhận" nzCancelText="Hủy" (nzOnOk)="submitForm()"
+  (nzOnCancel)="handleCancel()" nzWidth="40%">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="fullname">Họ tên</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="fullname" id="fullname" />
+        <nz-form-explain *ngIf="validateForm.get('fullname')?.dirty && validateForm.get('fullname')?.errors">
+          Họ tên không được để trống!
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="transaction_code" nzRequired>Mã giao dịch</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input id="transaction_code" formControlName="transaction_code" />
+        <nz-form-explain
+          *ngIf="validateForm.get('transaction_code')?.dirty && validateForm.get('transaction_code')?.errors">
+          Mã giao dịch không được để trống1
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>Email giao dịch</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input id="email" formControlName="email" />
+        <nz-form-explain *ngIf="validateForm.get('email')?.dirty && validateForm.get('email')?.errors">
+          Email không được để trống!
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">Số điện Thoại</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="phone" id="phone" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username_telegram">Username telegram</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="username_telegram" id="username_telegram" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="price_transaction">Phí học viên</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input appOnlyNumber formControlName="price_transaction" id="price_transaction" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="note">Ghi chú</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input  formControlName="note" id="note" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="active">Trạng thái</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <label nz-checkbox formControlName="active">
+          <span>Kích hoạt</span>
+        </label>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+
+</nz-modal>
