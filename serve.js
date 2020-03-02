@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multiparty = require('multiparty');
 var logger = require('morgan');
-
+var path = require("path");
 var cors = require('cors');
 var app = express();
 var fileUpload = require('express-fileupload');
@@ -13,7 +13,10 @@ app.use(fileUpload());
 app.use(cors());//cấp quyền cho phép sử dụng api 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use('/public', express.static('public'))
+
+
+app.use(express.static(path.join(__dirname, 'app-client/dist')));
+app.use('/public', express.static('public'));
 
 //Api--
 app.use('/api/customer', require('./routes/customer.router')());

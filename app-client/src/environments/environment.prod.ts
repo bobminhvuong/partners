@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  APIHOST: 'http://vay.guone.vn/service',
-  APICURRENTSERVE: 'http://vay.guone.vn'
+  APIHOST: 'http://ancungfriend.herokuapp.com',
+  APICURRENTSERVE: 'http://ancungfriend.herokuapp.com'
 };

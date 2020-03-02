@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  APIHOST: 'http://localhost:3000',
-  APICURRENTSERVE:'http://localhost:3000'
+  APIHOST: 'http://ancungfriend.herokuapp.com',
+  APICURRENTSERVE:'http://ancungfriend.herokuapp.com'
 };
 
 /*
